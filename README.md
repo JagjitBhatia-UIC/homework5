@@ -62,7 +62,7 @@ code to match this:
   endif
 ```
 `sleep()` puts the process to sleep for 1 second. Try making 100 requests to your server again. How long 
-does it take now?  
+does it take now? Use the `time` utility to get an exact value.  
 
 Now add a preprocessor macro to your file that looks like this:  
 ```c
@@ -78,7 +78,9 @@ zombie children. You can do that how you see fit, but I did it with a signal han
 
 We will test that your server can handle lots of requests. You should be able to reliably serve 300 rapid fire requests.  
 
+Use the `time` utility to measure the run time of the concurrent program. Why is it faster?  
+
 ## Submission  
 We will collect the assignments through gradescope. There won't be an autograder because the cloud instances don't 
-have multiple cores to test your concurrency results. We expect the program to work as described.  
+have multiple cores to test your concurrency results. We expect the program to work as described. Name your file server.c  
 There will also be some short answer questions about socket programming for you to answer.  
