@@ -82,5 +82,7 @@ Use the `time` utility to measure the run time of the concurrent program. Why is
 
 ## Submission  
 We will collect the assignments through gradescope. There won't be an autograder because the cloud instances don't 
-have multiple cores to test your concurrency results. We expect the program to work as described. Name your file server.c  
+have multiple cores to test your concurrency results. We expect the program to work as described.  
+Name your file `server.c`  
+Use the makefile provided in this repo.  
 There will also be some short answer questions about socket programming for you to answer.  
