@@ -18,36 +18,41 @@ about how to do the assignment.
 ## A Simple Server
 
 Bryant and O'Halloran introduce an echo server on page 947. Your first task is to implement 
-this server, but with a twist. Your server will count the number of times it has accepted a 
-connection and store them in a log file called `log.txt`. If your server is called 5 times, the 
+this server, but with a twist. First, your server will return a page stored in the same folder 
+called index.html. Second, your server will count the number of times it has accepted a 
+connection and store them in a log file called `log.txt` along with the client name and client port. 
+If your server is called 5 times, the 
 contents of `log.txt` will be: 
 ```BASH
-1  
-2  
-3  
-4  
-5
+1 localhost 123456  
+2 localhost 123457  
+3 localhost 123543  
+4 192.178.3.2 123654   
+5 localhost 123457  
 ```
+Note - the client name and port will vary by invocation and by the machine you use. For instance, if 
+you invoke it from your own computer it will be `localhost`, if its from another computer on your network 
+it will have an ip address.  
 
 You can invoke your server using the following command:  
 `curl localhost:<port number>`  
-The response should be the number of times the server has been invoked. The first time you make a request 
+The response should be the index.html file. The first time you make a request 
 it will look like this:  
 ```BASH
 cs361> curl localhost:4000  
-1
+<text of the index.html file>
 ```
 The 1,000th time you call the server it will look like this:  
 ```BASH
 cs361> curl localhost:4000  
-1000  
+<text of the index.html file>
 ```
 
 But wait, there's more... Curl will not be happy if you don't have a properly formatted HTTP header. 
 Reference Bryan and O'Hallaron 11.5.3 to learn how to do this. 
 
 To test your server you can run the following:  
-`cs361>for((i=0; i<100; i==)) do curl localhost:4000 done`  
+`cs361>for((i=0; i<100; i+=1)) do curl localhost:4000 & done`  
 Your log file should list numbers from 1 to 100 in order. 
 
 ## An Introduction to Concurrency
@@ -61,6 +66,9 @@ code to match this:
     sleep(1);
   endif
 ```
+`ifndef` is a preprocesser macro meaning "if not defined." When compiling the concurrent server we use the 
+`-D CONCURRENT` flag. The ifndef will make sure this section of code is compiled when `-D CONCURRENT` is not 
+applied.  
 `sleep()` puts the process to sleep for 1 second. Try making 100 requests to your server again. How long 
 does it take now? Use the `time` utility to get an exact value.  
 
@@ -74,7 +82,8 @@ Now add a preprocessor macro to your file that looks like this:
   endif
 ```
 Your parent should not block while we are waiting for the child to terminate, and you must reap all 
-zombie children. You can do that how you see fit, but I did it with a signal handler.  
+zombie children. You can do that how you see fit, but I did it with a signal handler. You should also 
+limit the number of concurrent processes to 1 parent and 5 children.  
 
 We will test that your server can handle lots of requests. You should be able to reliably serve 300 rapid fire requests.  
 
