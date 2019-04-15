@@ -1,5 +1,6 @@
-# Homework5
+# Homework5 - Due 21-Apr 12:00
 ## A Simple Server and a Concurrency Experiment
+Estimated Time - 6 Hrs.
 
 The objective of this homework is to gain familiarity network programming with sockets and 
 to get you thinking about the benefits of writing concurrent programs. 
