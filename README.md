@@ -1,6 +1,30 @@
-# Homework5 - Due 21-Apr 12:00
+# Homework5 Rev 1 - Due 21-Apr 12:00
 ## A Simple Server and a Concurrency Experiment
 Estimated Time - 6 Hrs.
+
+## Revisions
+You will submit a file `server.c` with your server code and a `makefile` that builds two executables - 
+`server` and `server_concurrent`. The makefile in this repo gives the recipe for building `server_concurrent` 
+with the preprocessor macros defined below. 
+
+Your executables, `server` and `server_concurrent` will take the port number as a command line argument. 
+Example: 
+```BASH
+./server 40000
+```
+launches the sequential server on port 40000. 
+
+The log file must be formatted exactly as shown below. Don't get caught up on if the client name is a string 
+like "localhost" or an IP like "127.0.0.1"
+
+The log file will be written to the same directory that the executable, `server` or `server_concurrent` is in. 
+This is also the location of `index.html`. Your program must read `index.html`. It will be tested by putting a random 
+html file in the directory to see if it serves properly. 
+
+curl cannot show any errors. This means that you need to close the socket properly when you are finished serving the 
+page. You also need to send the appropriate http header. 
+
+## Introduction
 
 The objective of this homework is to gain familiarity network programming with sockets and 
 to get you thinking about the benefits of writing concurrent programs. 
